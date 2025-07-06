@@ -310,7 +310,7 @@ void CsvForSpreadsheetExporter::saveVectors(ResultFileManager *manager, const ID
             csv.writeString(vector->getModuleName());
             csv.writeString(vector->getName());
             csv.writeString("TIME");
-            for (int j = 0; j < data->length(); j++) {
+            for (size_t j = 0; j < data->length(); j++) {
                 if (data->hasPreciseX())
                     csv.writeBigDecimal(data->getPreciseX(j));
                 else
@@ -323,7 +323,7 @@ void CsvForSpreadsheetExporter::saveVectors(ResultFileManager *manager, const ID
             csv.writeString(vector->getModuleName());
             csv.writeString(vector->getName());
             csv.writeString("VALUE");
-            for (int j = 0; j < data->length(); j++)
+            for (size_t j = 0; j < data->length(); j++)
                 csv.writeBigDecimal(data->getY(j));
             csv.writeNewLine();
         }
@@ -341,12 +341,12 @@ void CsvForSpreadsheetExporter::saveVectors(ResultFileManager *manager, const ID
         }
 
         // count number of data rows
-        int numRows = 0;
+        size_t numRows = 0;
         for (int i = 0; i < numVectors; ++i)
             numRows = std::max(numRows, xyArrays[i]->length());
 
         // write data rows
-        for (int i = 0; i < numRows; ++i) {
+        for (size_t i = 0; i < numRows; ++i) {
             for (int j = 0; j < numVectors; ++j) {
                 XYArray *data = xyArrays[j];
                 if (data->length() <= i) {

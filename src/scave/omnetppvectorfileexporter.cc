@@ -149,9 +149,9 @@ void OmnetppVectorFileExporter::saveResults(const std::string& fileName, ResultF
             const VectorResult *vector = manager->getVector(id);
             void *vectorHandle = vectorHandles[i];
             XYArray *array = xyArrays[i];
-            int length = array->length();
+            size_t length = array->length();
             bool hasPreciseX = array->hasPreciseX();
-            for (int j = 0; j < length; j++) {
+            for (size_t j = 0; j < length; j++) {
                 const BigDecimal time = hasPreciseX ? array->getPreciseX(j) : BigDecimal(array->getX(j));
                 if (!time.isSpecial())
                     writer.recordInVector(vectorHandle, array->getEventNumber(j), time.getIntValue(), time.getScale(), array->getY(j));

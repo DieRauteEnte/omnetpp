@@ -264,7 +264,7 @@ NB_MODULE(MODULENAME, m) {
             nb::ndarray<double, nb::ndim<1>, nb::c_contig, nb::device::cpu> xs,
             nb::ndarray<double, nb::ndim<1>, nb::c_contig, nb::device::cpu> ys
         ) {
-            int l = xyArray->length();
+            size_t l = xyArray->length();
             if (xs.shape(0) != l || ys.shape(0) != l)
                 throw std::runtime_error("xyArrayToNumpyArrays: shape mismatch");
             memcpy(xs.data(), xyArray->xs.data(), l * sizeof(double));

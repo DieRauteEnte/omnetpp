@@ -186,9 +186,9 @@ void JsonExporter::writeX(XYArray *array)
     std::ostream& out = writer.out();
     writeVectorProlog();
     bool first = true;
-    int n = array->length();
+    size_t n = array->length();
     bool hasPreciseX = array->hasPreciseX();
-    for (int i = 0; i < n; i++) {
+    for (size_t i = 0; i < n; i++) {
         if (!first)
             out << ", ";
         first = false;
@@ -207,8 +207,8 @@ void JsonExporter::writeY(XYArray *array)
     std::ostream& out = writer.out();
     writeVectorProlog();
     bool first = true;
-    int n = array->length();
-    for (int i = 0; i < n; i++) {
+    size_t n = array->length();
+    for (size_t i = 0; i < n; i++) {
         if (!first)
             out << ", ";
         first = false;
@@ -224,8 +224,8 @@ void JsonExporter::writeEventNumbers(XYArray *array)
     std::ostream& out = writer.out();
     writeVectorProlog();
     bool first = true;
-    int n = array->length();
-    for (int i = 0; i < n; i++) {
+    size_t n = array->length();
+    for (size_t i = 0; i < n; i++) {
         if (!first)
             out << ", ";
         first = false;

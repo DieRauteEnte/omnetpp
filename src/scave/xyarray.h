@@ -40,12 +40,12 @@ class SCAVE_API XYArray
 
         bool hasPreciseX() const  {return !xps.empty();}
         bool hasEventNumbers() const  {return !ens.empty();}
-        int length() const  {return xs.size();}
+        size_t length() const  {return xs.size();}
 
-        double getX(int i) const  {return xs.at(i);}
-        double getY(int i) const  {return ys.at(i);}
-        const BigDecimal& getPreciseX(int i) const {return xps.at(i); }
-        eventnumber_t getEventNumber(int i) const {return ens.at(i); }
+        double getX(size_t i) const  {return xs.at(i);}
+        double getY(size_t i) const  {return ys.at(i);}
+        const BigDecimal& getPreciseX(size_t i) const {return xps.at(i); }
+        eventnumber_t getEventNumber(size_t i) const {return ens.at(i); }
 };
 
 }  // namespace scave

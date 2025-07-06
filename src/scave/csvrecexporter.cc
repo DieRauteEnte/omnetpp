@@ -358,7 +358,7 @@ void CsvRecordsExporter::writeXAsString(const XYArray *data)
     std::ostream& out = csv.out();
     csv.beginRaw();
     out << "\"";
-    for (int j = 0; j < data->length(); j++) {
+    for (size_t j = 0; j < data->length(); j++) {
         if (j != 0)
             out << " ";
         if (data->hasPreciseX())
@@ -375,7 +375,7 @@ void CsvRecordsExporter::writeYAsString(const XYArray *data)
     std::ostream& out = csv.out();
     csv.beginRaw();
     out << "\"";
-    for (int j = 0; j < data->length(); j++) {
+    for (size_t j = 0; j < data->length(); j++) {
         if (j != 0)
             out << " ";
         csv.writeRawDouble(data->getY(j));
