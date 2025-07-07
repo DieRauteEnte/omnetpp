@@ -110,8 +110,8 @@ void testReaderBuilder(const char *inputfile, const char *outputfile)
         const VectorResult& vector = resultfilemanager.getVector(id);
         ArrayBuilderNode *builder = builders[i];
         XYArray *array = builder->getArray();
-        int s = array->length();
-        for (int i = 0; i < s; ++i) {
+        size_t s = array->length();
+        for (size_t i = 0; i < s; ++i) {
             BigDecimal xp = array->getPreciseX(i);
             double x = array->getX(i);
             double y = array->getY(i);
