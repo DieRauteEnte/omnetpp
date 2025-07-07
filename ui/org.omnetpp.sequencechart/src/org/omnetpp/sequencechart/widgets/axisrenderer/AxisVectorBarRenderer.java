@@ -96,13 +96,13 @@ public class AxisVectorBarRenderer implements IAxisRenderer {
     public void drawAxis(Graphics graphics, IEvent startEvent, IEvent endEvent)
     {
         Rectangle rect = graphics.getClip(Rectangle.SINGLETON);
-        int size = getDataLength();
+        long size = getDataLength();
 
-        int startIndex = getIndex(startEvent, true);
+        long startIndex = getIndex(startEvent, true);
         if (startIndex == -1)
             startIndex = 0;
 
-        int endIndex = getIndex(endEvent, false);
+        long endIndex = getIndex(endEvent, false);
         if (endIndex == -1)
             endIndex = size;
 
@@ -119,7 +119,7 @@ public class AxisVectorBarRenderer implements IAxisRenderer {
         // draw axis as a colored thick line with labels representing values
         // two phases: first draw the background and after that draw the values
         for (int phase = 0; phase < 2; phase++) {
-            for (int i = startIndex; i < endIndex; i++) {
+            for (long i = startIndex; i < endIndex; i++) {
                 long eventNumber = getEventNumber(i);
                 long nextEventNumber = Math.min(endEventNumber, (i == size - 1) ? endEventNumber : getEventNumber(i + 1));
 
@@ -162,7 +162,7 @@ public class AxisVectorBarRenderer implements IAxisRenderer {
                 if (x1 == Integer.MAX_VALUE || x2 == Integer.MAX_VALUE)
                     continue;
 
-                int colorIndex = getValueIndex(i);
+                long colorIndex = getValueIndex(i);
                 graphics.setBackgroundColor(ColorFactory.getGoodLightColor(colorIndex));
 
                 if (phase == 0) {
@@ -200,15 +200,15 @@ public class AxisVectorBarRenderer implements IAxisRenderer {
     /**
      * Returns the element index having less or greater or equal event number in the data array depending on the given flag.
      */
-    public int getIndex(IEvent event, boolean before)
+    public long getIndex(IEvent event, boolean before)
     {
-        int index = -1;
-        int left = 0;
-        int right = getDataLength() - 1;
+        long index = -1;
+        long left = 0;
+        long right = getDataLength() - 1;
         long eventNumber = event.getEventNumber();
 
         while (left <= right) {
-            int mid = (right + left) / 2;
+            long mid = (right + left) / 2;
 
             if (getEventNumber(mid) == eventNumber) {
                 do {
@@ -254,14 +254,14 @@ public class AxisVectorBarRenderer implements IAxisRenderer {
     /**
      * Returns the index having less or greater or equal simulation time in the data array depending on the given flag.
      */
-    public int getIndex(BigDecimal simulationTime, boolean before)
+    public long getIndex(BigDecimal simulationTime, boolean before)
     {
-        int index = -1;
-        int left = 0;
-        int right = getDataLength();
+        long index = -1;
+        long left = 0;
+        long right = getDataLength();
 
         while (left <= right) {
-            int mid = (right + left) / 2;
+            long mid = (right + left) / 2;
 
             if (getSimulationTime(mid) == simulationTime) {
                 do {
@@ -302,17 +302,17 @@ public class AxisVectorBarRenderer implements IAxisRenderer {
         }
     }
 
-    public int getDataLength()
+    public long getDataLength()
     {
         return data.length();
     }
 
-    public BigDecimal getSimulationTime(int index)
+    public BigDecimal getSimulationTime(long index)
     {
         return new BigDecimal(data.getPreciseX(index).toBigDecimal());
     }
 
-    public long getEventNumber(int index)
+    public long getEventNumber(long index)
     {
         Assert.isTrue(0 <= index && index < data.length());
         data.getX(index);
@@ -321,12 +321,12 @@ public class AxisVectorBarRenderer implements IAxisRenderer {
         return data.getEventNumber(index);
     }
 
-    public double getValue(int index)
+    public double getValue(long index)
     {
         return data.getY(index);
     }
 
-    private int getValueIndex(int index)
+    private long getValueIndex(long index)
     {
         if (type == ResultItem.DataType.TYPE_ENUM || type == ResultItem.DataType.TYPE_INT)
             return (int)Math.floor(getValue(index));
@@ -339,7 +339,7 @@ public class AxisVectorBarRenderer implements IAxisRenderer {
         }
     }
 
-    private String getValueText(int index)
+    private String getValueText(long index)
     {
         if (type == ResultItem.DataType.TYPE_ENUM)
             return enumType.nameOf((int)Math.floor(getValue(index)));
